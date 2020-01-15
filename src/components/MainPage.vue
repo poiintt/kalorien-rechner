@@ -1,39 +1,42 @@
 <template>
-  <div class="hello">
+    <div class="hello">
 
-    <h1>{{ msg }}</h1>
-    <p>
-      Berechnen Sie ganz einfach Ihren Kalorien Verbrauch<br>
-    </p>
-    <h3>Nahrung auswählen</h3>
-  </div>
+        <h1>{{ msg }}</h1>
+        <p>
+            Berechnen Sie ganz einfach Ihren Kalorien Verbrauch<br>
+        </p>
+        <h3>Nahrung auswählen</h3>
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'MainPage',
-  data (){
-    return{
-      msg: 'Kalorien-Rechner'
+    export default {
+        name: 'MainPage',
+        data() {
+            return {
+                msg: 'Kalorien-Rechner'
+            }
+        }
     }
-  }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+    h3 {
+        margin: 40px 0 0;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        display: inline-block;
+        margin: 0 10px;
+    }
+
+    a {
+        color: #42b983;
+    }
 </style>

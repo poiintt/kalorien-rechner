@@ -1,17 +1,17 @@
 <template>
-  <div class="hello">
-  </div>
+    <div class="hello">
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'Home',
-  data (){
-    return{
-      msg: 'Kalorien-Rechner'
+    export default {
+        name: 'Home',
+        data() {
+            return {
+                msg: 'Kalorien-Rechner'
+            }
+        }
     }
-  }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

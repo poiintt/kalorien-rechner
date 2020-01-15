@@ -2,14 +2,14 @@
     <div class="hello">
 
         <h1>{{ msg }}</h1>
-            <p>
+        <p>
             Kalorien Übersicht<br>
         </p>
-        <table id="tabel1">
+        <table id="table_kcal">
             <thead>
             <tr>
                 <th>Nahrung</th>
-                <th>Kalorien</th>
+                <th>kcal</th>
             </tr>
             </thead>
             <thead>
@@ -24,7 +24,14 @@
                 <th>3</th>
             </tr>
             </thead>
-        </table><button>Neues Element hinzufügen</button>
+            <thead>
+            <tr>
+                <input v-model="message" placeholder="Nahrung">
+                <input v-model="message" placeholder="kcal">
+            </tr>
+            </thead>
+        </table>
+        <button>Neues Element hinzufügen</button>
     </div>
 </template>
 
@@ -32,24 +39,28 @@
     export default {
         name: "Overview",
         data() {
-            return{
-            msg: 'Übersichtseite'
+            return {
+                msg: 'Übersichtseite'
             }
-        }}
+        }
+    }
 </script>
 
 <style scoped>
     h3 {
         margin: 40px 0 0;
     }
+
     ul {
         list-style-type: none;
         padding: 0;
     }
+
     li {
         display: inline-block;
         margin: 0 10px;
     }
+
     a {
         color: #42b983;
     }
