@@ -37,15 +37,17 @@
                 }
             }
         },
-        /*methods: {
+        methods: {
             onSelect (isChecked, index, data) {
+                // eslint-disable-next-line no-console
                 console.log('onSelect: ', isChecked, index, data)
-                console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
+                //console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
             },
             onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
+                // eslint-disable-next-line no-console
                 console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
             }
-        }*/
+        },
         components: {VueTableDynamic}
     }
 </script>
