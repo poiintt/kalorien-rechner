@@ -6,37 +6,50 @@
             Berechnen Sie ganz einfach Ihren Kalorien Verbrauch<br>
         </p>
         <h3>Nahrung auswählen</h3>
+        <vue-table-dynamic
+                :params="params"
+                @select="onSelect"
+                @selection-change="onSelectionChange"
+                ref="table"
+        >
+        </vue-table-dynamic>
     </div>
 </template>
 
 <script>
+    import VueTableDynamic from 'vue-table-dynamic'
+
     export default {
         name: 'MainPage',
         data() {
             return {
-                msg: 'Kalorien-Rechner'
+                msg: 'Kalorien-Rechner',
+                params: {
+                    data: [
+                        ['Nahrungsmittel', 'kcal/100g'],
+                        ['Kartoffeln', 86],
+                        ['Nudeln', 158],
+                        ['Pizza Margherita', 199],
+                        ['Croissant', 393]
+                    ],
+                    header: 'row',
+                    showCheck: true
+                }
             }
-        }
+        },
+        /*methods: {
+            onSelect (isChecked, index, data) {
+                console.log('onSelect: ', isChecked, index, data)
+                console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
+            },
+            onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
+                console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+            }
+        }*/
+        components: {VueTableDynamic}
     }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    h3 {
-        margin: 40px 0 0;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-
-    a {
-        color: #42b983;
-    }
 </style>

@@ -2,14 +2,12 @@
     <div id="app">
         <MainPage msg="Kalorien-Rechner"/>
         <div>
-            <ul>
-                <li>
-                    <router-link to="/mainpage">Startseite</router-link>
-                </li>
-                <li>
-                    <router-link to="/overview">Übersichtsseite</router-link>
-                </li>
-            </ul>
+            <table>
+                <tr>
+                    <td><router-link to="/mainpage">Startseite</router-link></td>
+                    <td><router-link to="/overview">Übersichtsseite</router-link></td>
+                </tr>
+            </table>
         </div>
         <router-view>
 
@@ -33,8 +31,7 @@
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        text-align: center;
+        text-align: left;
         color: #2c3e50;
-        margin-top: 60px;
     }
 </style>

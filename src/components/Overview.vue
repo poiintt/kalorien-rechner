@@ -9,29 +9,34 @@
             <thead>
             <tr>
                 <th>Nahrung</th>
-                <th>kcal</th>
+                <th>kcal/100g</th>
             </tr>
             </thead>
             <thead>
             <tr>
                 <th>Kartoffel</th>
-                <th>2</th>
+                <th>86</th>
             </tr>
             </thead>
             <thead>
             <tr>
                 <th>Nudeln</th>
-                <th>3</th>
+                <th>158</th>
             </tr>
             </thead>
             <thead>
             <tr>
-                <input v-model="message" placeholder="Nahrung">
-                <input v-model="message" placeholder="kcal">
+                <th>Pizza Margherita</th>
+                <th>199</th>
+            </tr>
+            </thead>
+            <thead>
+            <tr>
+                <th>Croissant</th>
+                <th>393</th>
             </tr>
             </thead>
         </table>
-        <button>Neues Element hinzufügen</button>
     </div>
 </template>
 
