@@ -1,13 +1,20 @@
 <template>
   <div id="app">
     <MainPage msg="Kalorien-Rechner"/>
-    <Overview msg="Kalorien Übersicht"/>
+    <div>
+      <ul>
+        <li><router-link to="/mainpage">Startseite</router-link></li>
+        <li><router-link to="/overview">Übersichtsseite</router-link></li>
+      </ul>
+    </div>
+    <router-view>
+
+    </router-view>
   </div>
 </template>
 
 <script>
-import MainPage from './components/MainPage.vue'
-//import Overview from './components/Overview.vue'
+import MainPage from './components/Home.vue'
 
 export default {
   name: 'app',
