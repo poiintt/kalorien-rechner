@@ -1,9 +1,9 @@
 <template>
     <div id="app">
-        <MainPage msg="Kalorien-Rechner"/>
         <div>
             <table>
                 <tr>
+                    <td><router-link to="/login">Login</router-link></td>
                     <td><router-link to="/mainpage">Startseite</router-link></td>
                     <td><router-link to="/overview">Übersichtsseite</router-link></td>
                 </tr>
@@ -16,12 +16,26 @@
 </template>
 
 <script>
-    import MainPage from './components/Home.vue'
-
     export default {
         name: 'app',
-        components: {
-            MainPage
+        data() {
+            return {
+                msg: 'Kalorien-Rechner',
+                authenticated: false,
+                testAccount: {
+                    username: "us",
+                    password: "pw"
+                },
+                params: {
+                    data: [
+                        ['Nahrungsmittel', 'kcal/100g'],
+                        ['Kartoffeln', 86],
+                        ['Nudeln', 138],
+                        ['Pizza Margherita', 199],
+                        ['Croissant', 393]
+                    ]
+                }
+            }
         }
     }
 </script>
@@ -33,5 +47,15 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: left;
         color: #2c3e50;
+    }
+    #app {
+        width: 600px;
+        border: 1px solid #CCCCCC;
+        background-color: #FFFFFF;
+        margin: 100px auto auto;
+        padding: 100px;
+    }
+    li td {
+        text-decoration: none;
     }
 </style>

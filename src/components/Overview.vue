@@ -1,20 +1,24 @@
 <template>
-    <div class="hello">
-
-        <h1>{{ msg }}</h1>
+    <div class="class_overview">
+        <h1>Übersichtseite</h1>
         <p>
-            Kalorien Übersicht<br>
+            Kalorien Übersich
         </p>
         <vue-table-dynamic
                 :params="params"
-                ref="table2">
+                @select="onSelectionChange"
+                @cell-change="onTableEdit"
+                ref="table">
         </vue-table-dynamic>
         <table>
             <tr>
                 <td><input id="input_food" v-model="input_food" placeholder="Nahrungsmittel"></td>
                 <td><input id="input_calories" v-model="input_calories" placeholder="kcal/100g"></td>
                 <td>
-                    <button v-on:click="onButtonClick">Nahrungsmittel hinzügen</button>
+                    <button v-on:click="btn_add">Hinzufügen</button>
+                </td>
+                <td>
+                    <button v-on:click="btn_remove">Entfernen</button>
                 </td>
             </tr>
         </table>
@@ -23,29 +27,32 @@
 
 <script>
     import VueTableDynamic from "vue-table-dynamic";
+    import App from "@/App";
 
     export default {
         name: "Overview",
         data() {
             return {
-                msg: 'Übersichtseite',
                 input_food: '',
                 input_calories: '',
                 params: {
-                    data: [
-                        ['Nahrungsmittel', 'kcal/100g'],
-                        ['Kartoffeln', 86],
-                        ['Nudeln', 138],
-                        ['Pizza Margherita', 199],
-                        ['Croissant', 393]
-                    ],
+                    data: App.data().params.data,
                     header: 'row',
+                    showCheck: true,
+                    edit: {row: 'all'}
                 }
             }
         },
         methods: {
-            onButtonClick() {
-                this.params.data.push([this.input_food,this.input_calories])
+            btn_add() {
+                App.data().params.data.add([this.input_food, this.input_calories]);
+                this.msg = this.input_food + this.input_calories;
+            },
+            btn_remove() {
+                //remove row/s
+            },
+            onTableEdit() {
+                //save changes
             }
         },
         components: {VueTableDynamic}

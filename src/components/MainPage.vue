@@ -1,7 +1,7 @@
 <template>
-    <div class="hello">
+    <div class="class_mainpage">
 
-        <h1>{{ msg }}</h1>
+        <h1>Kalorien-Rechner</h1>
         <p>Berechnen Sie ganz einfach Ihren Kalorien Verbrauch</p>
         <h3>Nahrung auswählen</h3>
         <vue-table-dynamic
@@ -15,16 +15,15 @@
 
 <script>
     import VueTableDynamic from 'vue-table-dynamic'
-    import Overview from "@/components/Overview";
+    import App from "@/App";
 
     export default {
         name: 'MainPage',
         data() {
             return {
-                msg: 'Kalorien-Rechner',
                 calories_total: 0,
                 params: {
-                    data: Overview.data().params.data,
+                    data: App.data().params.data,
                     header: 'row',
                     showCheck: true
                 }
@@ -32,7 +31,7 @@
         },
         methods: {
             onSelectionChange(checkedDatas, checkedIndexs) {
-                let table = Overview.data().params.data;
+                let table = App.data().params.data;
 
                 this.calories_total = 0;
                 checkedIndexs.forEach((row) => {
