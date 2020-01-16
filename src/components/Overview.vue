@@ -5,49 +5,50 @@
         <p>
             Kalorien Übersicht<br>
         </p>
-        <table id="table_kcal">
-            <thead>
+        <vue-table-dynamic
+                :params="params"
+                ref="table2">
+        </vue-table-dynamic>
+        <table>
             <tr>
-                <th>Nahrung</th>
-                <th>kcal/100g</th>
+                <td><input id="input_food" v-model="input_food" placeholder="Nahrungsmittel"></td>
+                <td><input id="input_calories" v-model="input_calories" placeholder="kcal/100g"></td>
+                <td>
+                    <button v-on:click="onButtonClick">Nahrungsmittel hinzügen</button>
+                </td>
             </tr>
-            </thead>
-            <thead>
-            <tr>
-                <th>Kartoffel</th>
-                <th>86</th>
-            </tr>
-            </thead>
-            <thead>
-            <tr>
-                <th>Nudeln</th>
-                <th>158</th>
-            </tr>
-            </thead>
-            <thead>
-            <tr>
-                <th>Pizza Margherita</th>
-                <th>199</th>
-            </tr>
-            </thead>
-            <thead>
-            <tr>
-                <th>Croissant</th>
-                <th>393</th>
-            </tr>
-            </thead>
         </table>
     </div>
 </template>
 
 <script>
+    import VueTableDynamic from "vue-table-dynamic";
+
     export default {
         name: "Overview",
         data() {
             return {
-                msg: 'Übersichtseite'
+                msg: 'Übersichtseite',
+                input_food: '',
+                input_calories: '',
+                params: {
+                    data: [
+                        ['Nahrungsmittel', 'kcal/100g'],
+                        ['Kartoffeln', 86],
+                        ['Nudeln', 138],
+                        ['Pizza Margherita', 199],
+                        ['Croissant', 393]
+                    ],
+                    header: 'row',
+                }
             }
-        }
+        },
+        methods: {
+            onButtonClick() {
+                this.params.data.push([this.input_food,this.input_calories])
+            }
+        },
+        components: {VueTableDynamic}
     }
 </script>
 
