@@ -13,17 +13,20 @@
                 ref="table"
         >
         </vue-table-dynamic>
+        <p>{{amount}} kcal/100g</p>
     </div>
 </template>
 
 <script>
     import VueTableDynamic from 'vue-table-dynamic'
 
+    let kcal_total = 0;
     export default {
         name: 'MainPage',
         data() {
             return {
                 msg: 'Kalorien-Rechner',
+                amount: kcal_total,
                 params: {
                     data: [
                         ['Nahrungsmittel', 'kcal/100g'],
@@ -38,14 +41,13 @@
             }
         },
         methods: {
-            onSelect (isChecked, index, data) {
-                // eslint-disable-next-line no-console
-                console.log('onSelect: ', isChecked, index, data)
-                //console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
-            },
-            onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
-                // eslint-disable-next-line no-console
-                console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+            onSelectionChange(checkedDatas, checkedIndexs) {
+                kcal_total = 0
+                checkedIndexs.forEach((value) => {
+                    if (value != 0)
+                        kcal_total += checkedDatas[value][1]
+                });
+                this.amount = kcal_total
             }
         },
         components: {VueTableDynamic}
