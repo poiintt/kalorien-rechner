@@ -30,10 +30,11 @@
             }
         },
         methods: {
+            //Login Button wird gedrückt
             login() {
                 if (this.input.username !== "" && this.input.password !== "") {
                     if (this.input.username === this.$parent.testAccount.username && this.input.password === this.$parent.testAccount.password) {
-                        this.$emit("authenticated", true);
+                        this.$parent.authenticated = true;
                         this.$router.replace('/mainpage');
                     } else {
                         this.error_message = "Der Benutzername und das Passwort stimmen nicht überein.";

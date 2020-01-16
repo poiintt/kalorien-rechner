@@ -4,8 +4,8 @@
             <table>
                 <tr>
                     <td><router-link to="/login">Login</router-link></td>
-                    <td><router-link to="/mainpage">Startseite</router-link></td>
-                    <td><router-link to="/overview">Übersichtsseite</router-link></td>
+                    <td><router-link to="/mainpage" v-if="authenticated">Startseite</router-link></td>
+                    <td><router-link to="/overview" v-if="authenticated">Übersichtsseite</router-link></td>
                 </tr>
             </table>
         </div>
@@ -33,7 +33,10 @@
                         ['Nudeln', 138],
                         ['Pizza Margherita', 199],
                         ['Croissant', 393]
-                    ]
+                    ],
+                    header: 'row',
+                    showCheck: true,
+                    edit: {row: 'all'}
                 }
             }
         }

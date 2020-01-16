@@ -3,7 +3,7 @@
 
         <h1>Kalorien-Rechner</h1>
         <p>Berechnen Sie ganz einfach Ihren Kalorien Verbrauch</p>
-        <h3>Nahrung auswählen</h3>
+        <h3>Nahrungsmittel auswählen</h3>
         <vue-table-dynamic
                 :params="params"
                 @selection-change="onSelectionChange"

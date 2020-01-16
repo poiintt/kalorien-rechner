@@ -2,11 +2,11 @@
     <div class="class_overview">
         <h1>Übersichtseite</h1>
         <p>
-            Kalorien Übersich
+            Kalorien Übersicht
         </p>
         <vue-table-dynamic
                 :params="params"
-                @select="onSelectionChange"
+                @selection-change="onSelectionChange"
                 @cell-change="onTableEdit"
                 ref="table">
         </vue-table-dynamic>
@@ -26,33 +26,50 @@
 </template>
 
 <script>
+    /* eslint-disable */
+
     import VueTableDynamic from "vue-table-dynamic";
     import App from "@/App";
+    // eslint-disable-next-line no-unused-vars
+    let selectedrows;
 
     export default {
         name: "Overview",
         data() {
             return {
                 input_food: '',
-                input_calories: '',
-                params: {
-                    data: App.data().params.data,
-                    header: 'row',
-                    showCheck: true,
-                    edit: {row: 'all'}
-                }
+                input_calories: ''
+            }
+        },
+        computed:{
+            params(){
+                return this.$parent._data.params;
             }
         },
         methods: {
             btn_add() {
-                App.data().params.data.add([this.input_food, this.input_calories]);
-                this.msg = this.input_food + this.input_calories;
+                this.params.data.add([this.input_food, this.input_calories]);
             },
-            btn_remove() {
-                //remove row/s
+            btn_remove: function () {
+                //this.$parent.data().params.data
+                //console.log(this.$parent)
+                selectedrows.forEach((row, index) => {
+                    if (index !== 0) {
+                        console.log(this.params.data);
+                        this.$parent._data.params.data.splice(index, 1,);
+                        //this.$parent._data.params, `data[${index}]`, [1,2];
+
+                        console.log(this.params.data);
+                    }
+                });
+
             },
             onTableEdit() {
                 //save changes
+            },
+            onSelectionChange(checkedDatas, checkedIndexs)  {
+                selectedrows = checkedIndexs;
+                this.input_food = selectedrows
             }
         },
         components: {VueTableDynamic}
