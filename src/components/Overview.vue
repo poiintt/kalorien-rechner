@@ -26,6 +26,7 @@
 </template>
 
 <script>
+    /* eslint-disable*/
     import VueTableDynamic from "vue-table-dynamic";
 
     let selected_rows;
@@ -38,27 +39,35 @@
                 input_calories: ''
             }
         },
-        computed:{
-            params(){
+        computed: {
+            params() {
                 return this.$parent._data.params;
             }
         },
         methods: {
             btn_add() {
-                this.$parent._data.params.data.push([this.input_food, this.input_calories]);
+                this.$parent._data.params.data.push([this.input_food, this.input_calories].parseInt());
             },
             btn_remove: function () {
-                selected_rows.forEach((row, index) => {
+                console.log(selected_rows);
+
+                selected_rows.reverse().forEach((index) => {
                     if (index !== 0) {
                         this.$parent._data.params.data.splice(index, 1,);
                     }
                 });
             },
             onTableEdit() {
-                console.log(this.$refs.vuetable.getData());
-                this.$parent._data.params.data = this.$refs.vuetable.getData();
+                let table_parsed = this.$refs.vuetable.getData();
+
+                table_parsed.forEach((array, index) => {
+                    if (index !== 0)
+                        table_parsed[index][1] = Number(table_parsed[index][1]);
+                });
+
+                this.$parent._data.params.data = table_parsed
             },
-            onSelectionChange(checkedDatas, checkedIndexs)  {
+            onSelectionChange(checkedDatas, checkedIndexs) {
                 selected_rows = checkedIndexs;
             }
         },
