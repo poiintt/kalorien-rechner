@@ -9,13 +9,12 @@
                 @selection-change="onSelectionChange"
                 ref="table">
         </vue-table-dynamic>
-        <p>= {{calories_total}} kcal</p>
+        <p>= {{calories_total}} kcal von 2000 kcal Tagesbedarf</p>
     </div>
 </template>
 
 <script>
     import VueTableDynamic from 'vue-table-dynamic'
-    import App from "@/App";
 
     export default {
         name: 'MainPage',
@@ -23,7 +22,7 @@
             return {
                 calories_total: 0,
                 params: {
-                    data: App.data().params.data,
+                    data: this.$parent._data.params.data,
                     header: 'row',
                     showCheck: true
                 }
@@ -31,7 +30,7 @@
         },
         methods: {
             onSelectionChange(checkedDatas, checkedIndexs) {
-                let table = App.data().params.data;
+                let table = this.$parent._data.params.data;
 
                 this.calories_total = 0;
                 checkedIndexs.forEach((row) => {

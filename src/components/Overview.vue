@@ -8,7 +8,7 @@
                 :params="params"
                 @selection-change="onSelectionChange"
                 @cell-change="onTableEdit"
-                ref="table">
+                ref="vuetable">
         </vue-table-dynamic>
         <table>
             <tr>
@@ -26,12 +26,9 @@
 </template>
 
 <script>
-    /* eslint-disable */
-
     import VueTableDynamic from "vue-table-dynamic";
-    import App from "@/App";
-    // eslint-disable-next-line no-unused-vars
-    let selectedrows;
+
+    let selected_rows;
 
     export default {
         name: "Overview",
@@ -48,28 +45,21 @@
         },
         methods: {
             btn_add() {
-                this.params.data.add([this.input_food, this.input_calories]);
+                this.$parent._data.params.data.push([this.input_food, this.input_calories]);
             },
             btn_remove: function () {
-                //this.$parent.data().params.data
-                //console.log(this.$parent)
-                selectedrows.forEach((row, index) => {
+                selected_rows.forEach((row, index) => {
                     if (index !== 0) {
-                        console.log(this.params.data);
                         this.$parent._data.params.data.splice(index, 1,);
-                        //this.$parent._data.params, `data[${index}]`, [1,2];
-
-                        console.log(this.params.data);
                     }
                 });
-
             },
             onTableEdit() {
-                //save changes
+                console.log(this.$refs.vuetable.getData());
+                this.$parent._data.params.data = this.$refs.vuetable.getData();
             },
             onSelectionChange(checkedDatas, checkedIndexs)  {
-                selectedrows = checkedIndexs;
-                this.input_food = selectedrows
+                selected_rows = checkedIndexs;
             }
         },
         components: {VueTableDynamic}
