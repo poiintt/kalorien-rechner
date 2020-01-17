@@ -5,6 +5,7 @@
         <p>Berechnen Sie ganz einfach Ihren Kalorien Verbrauch</p>
         <h3>Nahrungsmittel auswählen</h3>
         <vue-table-dynamic
+                style="width: 600px"
                 :params="params"
                 @selection-change="onSelectionChange"
                 ref="table">
@@ -45,4 +46,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 </style>

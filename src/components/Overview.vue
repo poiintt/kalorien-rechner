@@ -5,6 +5,7 @@
             Kalorien Übersicht
         </p>
         <vue-table-dynamic
+                style="width: 600px"
                 :params="params"
                 @selection-change="onSelectionChange"
                 @cell-change="onTableEdit"

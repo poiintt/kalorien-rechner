@@ -3,7 +3,7 @@
 
         <u><h1>kcal-calc</h1></u>
         <p>
-            Ganz einfach den Kalorienwert Ihrer Nahrung berechnen.
+            Ganz einfach den kcal-Wert Ihrer Nahrung berechnen.
         </p>
         <table id="table">
             <td><img id="screen_mainpage" src="../assets/kcal-calc_mainpage.png" alt="Screenshot_main"></td>
