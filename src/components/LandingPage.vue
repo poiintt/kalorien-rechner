@@ -6,7 +6,7 @@
             Ganz einfach den Kalorienwert Ihrer Nahrung berechnen.
         </p>
         <table id="table">
-            <td><img id="screen_mainpage" src="../assets/kcal-calc_mainpage.png" alt="Screenshot"></td>
+            <td><img id="screen_mainpage" src="../assets/kcal-calc_mainpage.png" alt="Screenshot_main"></td>
             <td><img id="screen_overview" src="../assets/kcal-calc_overview.png" alt="Screenshot"></td>
         </table>
         <h3>Kalorien-Rechner benutzen</h3>
