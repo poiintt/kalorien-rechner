@@ -47,7 +47,7 @@
         },
         methods: {
             btn_add() {
-                this.$parent._data.params.data.push([this.input_food, this.input_calories].parseInt());
+                this.$parent._data.params.data.push([this.input_food, Number(this.input_calories)]);
             },
             btn_remove: function () {
                 console.log(selected_rows);
