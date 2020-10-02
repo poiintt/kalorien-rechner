@@ -14,41 +14,41 @@
       <tr>
         <td>
           <input
-            id="input_food"
-            v-model="input_food"
+            id="inputFood"
+            v-model="inputFood"
             placeholder="Nahrungsmittel"
           />
         </td>
         <td>
           <input
-            id="input_calories"
-            v-model="input_calories"
+            id="inputCalories"
+            v-model="inputCalories"
             placeholder="kcal/100g"
           />
         </td>
         <td>
-          <button v-on:click="btn_add">Hinzufügen</button>
+          <button v-on:click="btnAdd">Hinzufügen</button>
         </td>
         <td>
-          <button v-on:click="btn_remove">Entfernen</button>
+          <button v-on:click="btnRemove">Entfernen</button>
         </td>
       </tr>
     </table>
   </div>
 </template>
 
-<script>
-/* eslint-disable*/
+<script lang="ts">
+import { defineComponent } from "vue";
 import VueTableDynamic from "vue-table-dynamic";
 
-let selected_rows;
+let selectedRows: number[];
 
-export default {
+export default defineComponent({
   name: "Overview",
   data() {
     return {
-      input_food: "",
-      input_calories: "",
+      inputFood: "",
+      inputCalories: "",
     };
   },
   computed: {
@@ -57,37 +57,37 @@ export default {
     },
   },
   methods: {
-    btn_add() {
+    btnAdd() {
       this.$parent._data.params.data.push([
-        this.input_food,
-        Number(this.input_calories),
+        this.inputFood,
+        Number(this.inputCalories)
       ]);
     },
-    btn_remove: function () {
-      console.log(selected_rows);
+    btnRemove: function () {
+      console.log(selectedRows);
 
-      selected_rows.reverse().forEach((index) => {
+      selectedRows.reverse().forEach((index: number) => {
         if (index !== 0) {
-          this.$parent._data.params.data.splice(index, 1);
+          this.$parent?._data.params.data.splice(index, 1);
         }
       });
     },
     onTableEdit() {
-      let table_parsed = this.$refs.vuetable.getData();
+      const tableParsed = this.$refs.vuetable.getData();
 
-      table_parsed.forEach((array, index) => {
+      tableParsed.forEach((array: any, index: number) => {
         if (index !== 0)
-          table_parsed[index][1] = Number(table_parsed[index][1]);
+          tableParsed[index][1] = Number(tableParsed[index][1]);
       });
 
-      this.$parent._data.params.data = table_parsed;
+      this.$parent._data.params.data = tableParsed;
     },
-    onSelectionChange(checkedDatas, checkedIndexs) {
-      selected_rows = checkedIndexs;
+    onSelectionChange(checkedDatas: any, checkedIndexs: number[]) {
+      selectedRows = checkedIndexs;
     },
   },
   components: { VueTableDynamic },
-};
+});
 </script>
 
 <style scoped>

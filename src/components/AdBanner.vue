@@ -6,10 +6,11 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "AdBanner",
-};
+<script lang="ts">
+import { defineComponent } from "vue";
+export default defineComponent({
+  name: "AdBanner"
+});
 </script>
 
 <style scoped></style>

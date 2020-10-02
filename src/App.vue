@@ -25,16 +25,12 @@
   </div>
 </template>
 
-<script>
-/* eslint-disable*/
-import AdBanner from "@/components/AdBanner";
+<script lang="ts">
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "app",
-  components: {
-    AdBanner,
-  },
-  data() {
+  data(){
     return {
       authenticated: false,
       testAccount: {
@@ -55,8 +51,7 @@ export default {
       },
     };
   },
-  methods: {},
-};
+});
 </script>
 
 <style>

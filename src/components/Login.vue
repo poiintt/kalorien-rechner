@@ -21,25 +21,29 @@
             />
           </td>
           <td>
-            <button type="button" v-on:click="login()">Login</button>
+            <button type="button" @click="login">Login</button>
           </td>
         </tr>
       </table>
-      <p>{{ error_message }}</p>
+
+      <p>
+        {{ errorMessage }}
+      </p>
     </div>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+export default defineComponent({
   name: "Login",
   data() {
     return {
-      error_message: "",
+      errorMessage: "",
       input: {
         username: "",
-        password: "",
-      },
+        password: ""
+      }
     };
   },
   methods: {
@@ -47,21 +51,19 @@ export default {
     login() {
       if (this.input.username !== "" && this.input.password !== "") {
         if (
-          this.input.username === this.$parent.testAccount.username &&
+          this.input.username === this.$parent?.testAccount.username &&
           this.input.password === this.$parent.testAccount.password
         ) {
           this.$parent.authenticated = true;
           this.$router.replace("/mainpage");
         } else {
-          this.error_message =
+          this.errorMessage =
             "Der Benutzername und das Passwort stimmen nicht überein.";
         }
       } else {
-        this.error_message = "Bitte geben Sie Benutzername und Passwort an.";
+        this.errorMessage = "Bitte geben Sie Benutzername und Passwort an.";
       }
-    },
-  },
-};
+    }
+  }
+});
 </script>
-
-<style scoped></style>

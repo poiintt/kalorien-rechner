@@ -23,10 +23,11 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "LandingPage",
-};
+<script lang="ts">
+import { defineComponent } from "vue";
+export default defineComponent({
+  name: "LandingPage"
+});
 </script>
 
 <style scoped>

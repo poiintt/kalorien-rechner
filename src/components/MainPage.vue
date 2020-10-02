@@ -14,33 +14,34 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import VueTableDynamic from "vue-table-dynamic";
 
-export default {
+export default defineComponent({
   name: "MainPage",
   data() {
     return {
-      calories_total: 0,
+      caloriesTotal: 0,
       params: {
         data: this.$parent._data.params.data,
         header: "row",
-        showCheck: true,
-      },
+        showCheck: true
+      }
     };
   },
   methods: {
-    onSelectionChange(checkedDatas, checkedIndexs) {
-      let table = this.$parent._data.params.data;
+    onSelectionChange(checkedDatas, checkedIndexs: Array<number>) {
+      const table = this.$parent._data.params.data;
 
-      this.calories_total = 0;
-      checkedIndexs.forEach((row) => {
-        if (row !== 0) this.calories_total += table[row][1];
+      this.caloriesTotal = 0;
+      checkedIndexs.forEach(row => {
+        if (row !== 0) this.caloriesTotal += table[row][1];
       });
-    },
+    }
   },
-  components: { VueTableDynamic },
-};
+  components: { VueTableDynamic }
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
