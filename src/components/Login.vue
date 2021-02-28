@@ -51,10 +51,10 @@ export default defineComponent({
     login() {
       if (this.input.username !== "" && this.input.password !== "") {
         if (
-          this.input.username === this.$parent?.testAccount.username &&
-          this.input.password === this.$parent.testAccount.password
+          this.input.username === this.$store.state.testAccount.username &&
+          this.input.password === this.$store.state.testAccount.password
         ) {
-          this.$parent.authenticated = true;
+          this.$store.state.authenticated = true;
           this.$router.replace("/mainpage");
         } else {
           this.errorMessage =
