@@ -3,46 +3,42 @@
     <h1>Kalorien-Rechner</h1>
     <p>Berechnen Sie ganz einfach Ihren Kalorien Verbrauch</p>
     <h3>Nahrungsmittel auswählen</h3>
-    <vue-table-dynamic
-      style="width: 600px"
-      :params="params"
-      @selection-change="onSelectionChange"
-      ref="table"
-    >
-    </vue-table-dynamic>
-    <p>= {{ calories_total }} kcal von 2000 kcal Tagesbedarf</p>
+    <vue-table-lite
+      :has-checkbox="true"
+      :columns="$store.state.table.columns"
+      :rows="$store.state.table.rows"
+      :total="$store.state.table.rows.length"
+      :messages="$store.state.table.messages"
+      @return-checked-rows="updateCheckedRows"
+    />
+    <p>= {{ caloriesTotal }} kcal von 2000 kcal Tagesbedarf</p>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import VueTableDynamic from "vue-table-dynamic";
+import VueTableLite from "vue3-table-lite";
+import { defineComponent, ref } from "vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
-  name: "MainPage",
-  data() {
-    return {
-      caloriesTotal: 0,
-      params: {
-        data: this.$parent._data.params.data,
-        header: "row",
-        showCheck: true
+  setup() {
+    const store = useStore();
+    const caloriesTotal = ref(0);
+
+    const updateCheckedRows = (rowKeys: string) => {
+      caloriesTotal.value = 0;
+      for (const row of rowKeys) {
+        const result = store.state.table.rows.find((x: any) => x.food === row);
+        caloriesTotal.value += result.kcal;
       }
     };
-  },
-  methods: {
-    onSelectionChange(checkedDatas, checkedIndexs: Array<number>) {
-      const table = this.$parent._data.params.data;
 
-      this.caloriesTotal = 0;
-      checkedIndexs.forEach(row => {
-        if (row !== 0) this.caloriesTotal += table[row][1];
-      });
-    }
+    return {
+      updateCheckedRows,
+      caloriesTotal,
+    };
   },
-  components: { VueTableDynamic }
+  name: "MainPage",
+  components: { VueTableLite },
 });
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>

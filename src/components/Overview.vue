@@ -2,14 +2,15 @@
   <div class="class_overview">
     <h1>Übersichtseite</h1>
     <p>Kalorien Übersicht</p>
-    <vue-table-dynamic
+    <vue-table-lite
       style="width: 600px"
-      :params="params"
-      @selection-change="onSelectionChange"
-      @cell-change="onTableEdit"
-      ref="vuetable"
-    >
-    </vue-table-dynamic>
+      :has-checkbox="true"
+      :columns="$store.state.table.columns"
+      :rows="$store.state.table.rows"
+      :total="$store.state.table.rows.length"
+      :messages="$store.state.table.messages"
+      @return-checked-rows="updateCheckedRows"
+    />
     <table>
       <tr>
         <td>
@@ -39,7 +40,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import VueTableDynamic from "vue-table-dynamic";
+import VueTableLite from "vue3-table-lite";
 
 let selectedRows: number[];
 
@@ -51,42 +52,34 @@ export default defineComponent({
       inputCalories: "",
     };
   },
-  computed: {
-    params() {
-      return this.$parent._data.params;
-    },
-  },
   methods: {
     btnAdd() {
-      this.$parent._data.params.data.push([
-        this.inputFood,
-        Number(this.inputCalories)
-      ]);
+      // this.$store.state.params.data.push([
+      //   this.inputFood,
+      //   Number(this.inputCalories)
+      // ]);
     },
-    btnRemove: function () {
+    btnRemove() {
       console.log(selectedRows);
 
       selectedRows.reverse().forEach((index: number) => {
         if (index !== 0) {
-          this.$parent?._data.params.data.splice(index, 1);
+          this.$store.state.params.data.splice(index, 1);
         }
       });
     },
     onTableEdit() {
-      const tableParsed = this.$refs.vuetable.getData();
-
-      tableParsed.forEach((array: any, index: number) => {
-        if (index !== 0)
-          tableParsed[index][1] = Number(tableParsed[index][1]);
-      });
-
-      this.$parent._data.params.data = tableParsed;
+      // const tableParsed = this.$refs.vuetable.getData();
+      // tableParsed.forEach((array: any, index: number) => {
+      //   if (index !== 0) tableParsed[index][1] = Number(tableParsed[index][1]);
+      // });
+      // store.state.params.data = tableParsed;
     },
     onSelectionChange(checkedDatas: any, checkedIndexs: number[]) {
       selectedRows = checkedIndexs;
     },
   },
-  components: { VueTableDynamic },
+  components: { VueTableLite },
 });
 </script>
 
