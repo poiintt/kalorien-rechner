@@ -8,27 +8,27 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "AdBanner",
-    component: AdBanner,
+    component: AdBanner
   },
   {
     path: "/landingpage",
     name: "LandingPage",
-    component: LandingPage,
+    component: LandingPage
   },
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: Login
   },
   {
     path: "/mainpage",
     name: "MainPage",
-    component: MainPage,
+    component: MainPage
   },
   {
     path: "/overview",
     name: "Overview",
-    component: Overview,
+    component: Overview
   },
 ];
 const router = createRouter({
