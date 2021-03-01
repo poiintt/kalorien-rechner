@@ -29,7 +29,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/overview",
     name: "Overview",
     component: Overview
-  },
+  }
 ];
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
