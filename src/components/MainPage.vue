@@ -22,6 +22,8 @@ import { defineComponent, ref } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
+  name: "MainPage",
+  components: { VueTableLite },
   setup() {
     const store = useStore();
     const caloriesTotal = ref(0);
@@ -37,8 +39,6 @@ export default defineComponent({
       updateCheckedRows,
       caloriesTotal
     };
-  },
-  name: "MainPage",
-  components: { VueTableLite }
+  }
 });
 </script>

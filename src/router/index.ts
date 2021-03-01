@@ -4,6 +4,7 @@ import LandingPage from "@/components/LandingPage.vue";
 import Login from "@/components/Login.vue";
 import MainPage from "@/components/MainPage.vue";
 import Overview from "@/components/Overview.vue";
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
