@@ -1,4 +1,4 @@
-import { State } from "vue";
+import { Row, State } from "vue";
 import { createStore } from "vuex";
 
 export default createStore({
@@ -49,7 +49,7 @@ export default createStore({
     };
   },
   mutations: {
-    addRow(state: State, row: any) {
+    addRow(state: State, row: Row) {
       state.table.rows.push(row);
     },
     removeRow(state: State, food: string) {
@@ -61,7 +61,7 @@ export default createStore({
       return state.table.rows.length;
     },
     getRowByFood: (state: State) => (food: string) => {
-      return state.table.rows.find((row: any) => row.food === food);
+      return state.table.rows.find((row: Row) => row.food === food);
     }
   },
   actions: {},
