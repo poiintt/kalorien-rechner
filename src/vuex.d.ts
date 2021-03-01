@@ -13,7 +13,7 @@ declare module "@vue/runtime-core" {
     isKey?: boolean;
   }
   interface State {
-    authenticated: true;
+    authenticated: boolean;
     testAccount: {
       username: string;
       password: string;

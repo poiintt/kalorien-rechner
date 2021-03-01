@@ -4,7 +4,7 @@ import { createStore } from "vuex";
 export default createStore({
   state(): State {
     return {
-      authenticated: true,
+      authenticated: false,
       testAccount: {
         username: "us",
         password: "pw"
