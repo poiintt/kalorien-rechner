@@ -8,7 +8,7 @@
             <input
               type="text"
               name="username"
-              v-model="input.username"
+              v-model="username"
               placeholder="Benutzername"
             />
           </td>
@@ -16,7 +16,7 @@
             <input
               type="password"
               name="password"
-              v-model="input.password"
+              v-model="password"
               placeholder="Passwort"
             />
           </td>
@@ -46,9 +46,9 @@ export default defineComponent({
     const errorMessage = ref("");
     const username = ref("");
     const password = ref("");
-    const input = { username, password };
 
     const login = () => {
+      console.log(username.value, password.value)
       if (username.value !== "" && password.value !== "") {
         if (
           username.value === store.state.testAccount.username &&
@@ -67,7 +67,8 @@ export default defineComponent({
 
     return {
       errorMessage,
-      input,
+      username,
+      password,
       login
     };
   }
