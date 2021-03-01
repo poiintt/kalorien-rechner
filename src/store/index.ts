@@ -1,7 +1,8 @@
+import { State } from "vue";
 import { createStore } from "vuex";
 
 export default createStore({
-  state() {
+  state(): State {
     return {
       authenticated: true,
       testAccount: {
@@ -45,9 +46,24 @@ export default createStore({
           noDataAvailable: "Keine Daten gefunden"
         }
       }
+    };
+  },
+  mutations: {
+    addRow(state: State, row: any) {
+      state.table.rows.push(row);
+    },
+    removeRow(state: State, food: string) {
+      state.table.rows = state.table.rows.filter(item => item.food !== food);
     }
   },
-  mutations: {},
+  getters: {
+    rowCount(state: State) {
+      return state.table.rows.length;
+    },
+    getRowByFood: (state: State) => (food: string) => {
+      return state.table.rows.find((row: any) => row.food === food);
+    }
+  },
   actions: {},
   modules: {}
 });

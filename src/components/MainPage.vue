@@ -4,10 +4,11 @@
     <p>Berechnen Sie ganz einfach Ihren Kalorien Verbrauch</p>
     <h3>Nahrungsmittel auswählen</h3>
     <vue-table-lite
+      style="width: 600px"
       :has-checkbox="true"
       :columns="$store.state.table.columns"
       :rows="$store.state.table.rows"
-      :total="$store.state.table.rows.length"
+      :total="$store.getters.rowCount"
       :messages="$store.state.table.messages"
       @return-checked-rows="updateCheckedRows"
     />
@@ -28,17 +29,16 @@ export default defineComponent({
     const updateCheckedRows = (rowKeys: string) => {
       caloriesTotal.value = 0;
       for (const row of rowKeys) {
-        const result = store.state.table.rows.find((x: any) => x.food === row);
-        caloriesTotal.value += result.kcal;
+        caloriesTotal.value += store.getters.getRowByFood(row).kcal;
       }
     };
 
     return {
       updateCheckedRows,
-      caloriesTotal,
+      caloriesTotal
     };
   },
   name: "MainPage",
-  components: { VueTableLite },
+  components: { VueTableLite }
 });
 </script>

@@ -7,7 +7,7 @@
       :has-checkbox="true"
       :columns="$store.state.table.columns"
       :rows="$store.state.table.rows"
-      :total="$store.state.table.rows.length"
+      :total="$store.getters.rowCount"
       :messages="$store.state.table.messages"
       @return-checked-rows="updateCheckedRows"
     />
@@ -49,24 +49,20 @@ export default defineComponent({
   data() {
     return {
       inputFood: "",
-      inputCalories: "",
+      inputCalories: ""
     };
   },
   methods: {
     btnAdd() {
-      // this.$store.state.params.data.push([
-      //   this.inputFood,
-      //   Number(this.inputCalories)
-      // ]);
+      this.$store.commit("addRow", {
+        food: this.inputFood,
+        kcal: Number(this.inputCalories)
+      });
     },
     btnRemove() {
-      console.log(selectedRows);
-
-      selectedRows.reverse().forEach((index: number) => {
-        if (index !== 0) {
-          this.$store.state.params.data.splice(index, 1);
-        }
-      });
+      this.$store.commit("removeRow", this.inputFood);
+      this.inputFood = "";
+      this.inputCalories = "";
     },
     onTableEdit() {
       // const tableParsed = this.$refs.vuetable.getData();
@@ -78,8 +74,18 @@ export default defineComponent({
     onSelectionChange(checkedDatas: any, checkedIndexs: number[]) {
       selectedRows = checkedIndexs;
     },
+    updateCheckedRows(rowKeys: string) {
+      if (rowKeys.length) {
+        const row = this.$store.getters.getRowByFood(rowKeys[0]);
+        this.inputFood = row.food;
+        this.inputCalories = row.kcal;
+      } else {
+        this.inputFood = "";
+        this.inputCalories = "";
+      }
+    }
   },
-  components: { VueTableLite },
+  components: { VueTableLite }
 });
 </script>
 
