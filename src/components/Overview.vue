@@ -39,53 +39,49 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import { useStore } from "vuex";
 import VueTableLite from "vue3-table-lite";
-
-let selectedRows: number[];
 
 export default defineComponent({
   name: "Overview",
-  data() {
-    return {
-      inputFood: "",
-      inputCalories: ""
-    };
-  },
-  methods: {
-    btnAdd() {
-      this.$store.commit("addRow", {
-        food: this.inputFood,
-        kcal: Number(this.inputCalories)
+  components: { VueTableLite },
+  setup() {
+    const store = useStore();
+    const inputFood = ref("");
+    const inputCalories = ref("");
+
+    const btnAdd = () => {
+      store.commit("addRow", {
+        food: inputFood.value,
+        kcal: Number(inputCalories.value)
       });
-    },
-    btnRemove() {
-      this.$store.commit("removeRow", this.inputFood);
-      this.inputFood = "";
-      this.inputCalories = "";
-    },
-    onTableEdit() {
-      // const tableParsed = this.$refs.vuetable.getData();
-      // tableParsed.forEach((array: any, index: number) => {
-      //   if (index !== 0) tableParsed[index][1] = Number(tableParsed[index][1]);
-      // });
-      // store.state.params.data = tableParsed;
-    },
-    onSelectionChange(checkedDatas: any, checkedIndexs: number[]) {
-      selectedRows = checkedIndexs;
-    },
-    updateCheckedRows(rowKeys: string) {
+    };
+
+    const btnRemove = () => {
+      store.commit("removeRow", inputFood.value);
+      inputFood.value = "";
+      inputCalories.value = "";
+    };
+
+    const updateCheckedRows = (rowKeys: string) => {
       if (rowKeys.length) {
-        const row = this.$store.getters.getRowByFood(rowKeys[0]);
-        this.inputFood = row.food;
-        this.inputCalories = row.kcal;
+        const row = store.getters.getRowByFood(rowKeys[0]);
+        inputFood.value = row.food;
+        inputCalories.value = row.kcal;
       } else {
-        this.inputFood = "";
-        this.inputCalories = "";
+        inputFood.value = "";
+        inputCalories.value = "";
       }
-    }
-  },
-  components: { VueTableLite }
+    };
+    return {
+      inputFood,
+      inputCalories,
+      btnAdd,
+      btnRemove,
+      updateCheckedRows
+    };
+  }
 });
 </script>
 

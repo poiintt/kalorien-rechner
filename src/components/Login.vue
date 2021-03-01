@@ -34,36 +34,42 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import { useStore } from "vuex";
+import router from "../router";
+
 export default defineComponent({
   name: "Login",
-  data() {
-    return {
-      errorMessage: "",
-      input: {
-        username: "",
-        password: ""
-      }
-    };
-  },
-  methods: {
-    //Login Button wird gedrückt
-    login() {
-      if (this.input.username !== "" && this.input.password !== "") {
+  setup() {
+    const store = useStore();
+
+    const errorMessage = ref("");
+    const username = ref("");
+    const password = ref("");
+    const input = { username, password };
+
+    const login = () => {
+      if (username.value !== "" && password.value !== "") {
         if (
-          this.input.username === this.$store.state.testAccount.username &&
-          this.input.password === this.$store.state.testAccount.password
+          username.value === store.state.testAccount.username &&
+          password.value === store.state.testAccount.password
         ) {
-          this.$store.state.authenticated = true;
-          this.$router.replace("/mainpage");
+          store.state.authenticated = true;
+          router.replace("/mainpage");
         } else {
-          this.errorMessage =
+          errorMessage.value =
             "Der Benutzername und das Passwort stimmen nicht überein.";
         }
       } else {
-        this.errorMessage = "Bitte geben Sie Benutzername und Passwort an.";
+        errorMessage.value = "Bitte geben Sie Benutzername und Passwort an.";
       }
-    }
+    };
+
+    return {
+      errorMessage,
+      input,
+      login
+    };
   }
 });
 </script>
